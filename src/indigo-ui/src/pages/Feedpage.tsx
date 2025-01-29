@@ -5,9 +5,7 @@ import { PostFactory } from '../factories/PostFactory';
 import { Card, CardContent, Typography } from '@mui/material';
 
 const Feedpage: React.FC = () => {
-    const [take, setTake] = useState<number>(20); // Start with 20 items
-    // Work on where I need to add flag to change from 20 to 15 items per request without
-    // disrespecting the state and effect hooks logic
+    const [take, setTake] = useState<number>(20);
     const [skip, setSkip] = useState<number>(0);
 
     const [feed, setFeed] = useState<Post[]>([]);
@@ -24,18 +22,17 @@ const Feedpage: React.FC = () => {
         }
     }
 
-    // What will happen 
     const onIntersection = (entries: IntersectionObserverEntry[]) => {
         const firstEntry = entries[0];
         if(firstEntry.isIntersecting && hasMore) {
+            // After the first load, we want to load 15 items at a time.
+            if(skip > 0) {
+                setTake(15);
+            }
             getPosts(take, skip);
-        } else {
-            console.log(`Taking ${take} items and skipping the previous ${skip - take} items`);
         }
     };
 
-
-    // When will happen
     useEffect(() => {
         const observer = new IntersectionObserver(onIntersection);
         if(observer) {
