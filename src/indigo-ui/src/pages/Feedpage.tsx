@@ -1,8 +1,9 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import Grid from '@mui/material/Grid2';
+import { Card, CardContent, Typography, Skeleton } from '@mui/material';
 import Navbar from '../components/layout/Navbar';
 import { Post } from '../models/Post';
 import { PostFactory } from '../factories/PostFactory';
-import { Card, CardContent, Typography } from '@mui/material';
 
 const Feedpage: React.FC = () => {
     const [take, setTake] = useState<number>(20);
@@ -10,6 +11,7 @@ const Feedpage: React.FC = () => {
 
     const [feed, setFeed] = useState<Post[]>([]);
     const [hasMore, setHasMore] = useState<boolean>(true);
+    const [loading, setLoading] = useState(true);
     const elementRef = useRef<HTMLDivElement>(null);
 
     const getPosts = async (take: number, skip: number) => {
@@ -19,13 +21,13 @@ const Feedpage: React.FC = () => {
         } else {
             setFeed(prev => [...prev, ...response.posts]);
             setSkip(prev => prev + take);
+            setLoading(false);
         }
     }
 
     const onIntersection = (entries: IntersectionObserverEntry[]) => {
         const firstEntry = entries[0];
         if(firstEntry.isIntersecting && hasMore) {
-            // After the first load, we want to load 15 items at a time.
             if(skip > 0) {
                 setTake(15);
             }
@@ -52,15 +54,35 @@ const Feedpage: React.FC = () => {
     return (
         <div>
             <Navbar />
-            {feed.map(post => (
-                <Card id={`card-${post.id}`} key={post.id}>
-                    <CardContent>
-                        <Typography variant="h5">{post.title}</Typography>
-                        <Typography variant="body2">{post.body}</Typography>
-                    </CardContent>
-                </Card>
-            ))}
-            <div id='load-more' ref={elementRef} style={{ height: '20px' }} />
+            <div style={{ padding: '16px' }}>
+                <Grid container spacing={2}>
+                    {loading ? (
+                        Array.from(new Array(20)).map((_, index) => (
+                            <Grid size={{ xs:12, sm:6, md:4, lg:3, xl:2 }} key={index}>
+                                <Card style={{ height: '250px' }}>
+                                    <CardContent>
+                                        <Skeleton variant="text" width="80%" />
+                                        <Skeleton variant="text" width="60%" />
+                                        <Skeleton variant="rectangular" height={118} />
+                                    </CardContent>
+                                </Card>
+                            </Grid>
+                        ))
+                    ) : (
+                        feed.map(post => (
+                            <Grid size={{ xs:12, sm:6, md:4, lg:3, xl:2 }} key={post.id}>
+                                <Card id={`card-${post.id}`} style={{ height: '250px' }}>
+                                    <CardContent>
+                                        <Typography variant="h5">{post.title}</Typography>
+                                        <Typography variant="body2">{post.body}</Typography>
+                                    </CardContent>
+                                </Card>
+                            </Grid>
+                        ))
+                    )}
+                </Grid>
+                <div id='load-more' ref={elementRef} style={{ height: '20px' }} />
+            </div>
         </div>
     );
 };
