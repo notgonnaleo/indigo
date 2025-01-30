@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Grid from '@mui/material/Grid2';
-import { Card, CardContent, Typography, Skeleton, Button, Box, Breadcrumbs, Link, FormControlLabel, Switch, TextField } from '@mui/material';
-import Navbar from '../components/layout/Navbar';
+import { Card, CardContent, Typography, Skeleton, Button, Box, Breadcrumbs, Link, TextField } from '@mui/material';
 import { InvoiceFactory } from '../factories/InvoiceFactory';
 import { Invoice, InvoiceStatus } from '../models/Invoice';
+import MainLayout from '../components/layout/MainLayout';
 
 const Inbox: React.FC = () => {
     const [take, setTake] = useState<number>(20);
@@ -52,8 +52,8 @@ const Inbox: React.FC = () => {
     }, [feed]);
 
     return (
+        <MainLayout>
         <Box>
-            <Navbar />
             <Box sx={{ padding: '16px' }}>
 
                 <Breadcrumbs aria-label="breadcrumb" sx={{ margin: '16px' }}>
@@ -64,6 +64,7 @@ const Inbox: React.FC = () => {
                 <Box sx={{ display: 'flex', justifyContent: 'space-between', marginBottom: '16px' }}>
                     {Object.keys(InvoiceStatus).filter(key => isNaN(Number(key))).map((status, index) => (
                         <Card
+                            variant='outlined'
                             key={index}
                             sx={{
                                 flex: 1,
@@ -94,6 +95,11 @@ const Inbox: React.FC = () => {
                         sx={{ marginRight: '16px' }}
                     />
                     <TextField
+                        label="Bank Account Number"
+                        variant="outlined"
+                        sx={{ marginRight: '16px' }}
+                    />
+                    <TextField
                         label="Amount"
                         variant="outlined"
                         sx={{ marginRight: '16px' }}
@@ -108,7 +114,9 @@ const Inbox: React.FC = () => {
                     {loading ? (
                         Array.from(new Array(20)).map((_, index) => (
                             <Grid size={{ xs:12, sm:6, md:4, lg:3, xl:2 }} key={index}>
-                                <Card sx={{ height: '200px' }}>
+                                <Card 
+                                    variant='outlined'
+                                    sx={{ height: '200px' }}>
                                     <CardContent>
                                         <Skeleton variant="text" width="80%" />
                                         <Skeleton variant="text" width="60%" />
@@ -129,7 +137,7 @@ const Inbox: React.FC = () => {
                                         flexDirection: 'column', 
                                         justifyContent: 'space-between', 
                                         transition: 'transform 0.2s', 
-                                        cursor: "pointer"
+                                        cursor: "pointer",
                                     }} 
                                     onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.05)'} 
                                     onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}
@@ -154,6 +162,7 @@ const Inbox: React.FC = () => {
                 <div id='load-more' ref={elementRef} style={{ height: '20px' }} />
             </Box>
         </Box>
+        </MainLayout>
     );
 };
 

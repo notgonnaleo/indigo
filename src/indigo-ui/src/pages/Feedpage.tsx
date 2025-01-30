@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Grid from '@mui/material/Grid2';
 import { Card, CardContent, Typography, Skeleton } from '@mui/material';
-import Navbar from '../components/layout/Navbar';
 import { Post } from '../models/Post';
 import { PostFactory } from '../factories/PostFactory';
 
@@ -53,7 +52,6 @@ const Feedpage: React.FC = () => {
 
     return (
         <div>
-            <Navbar />
             <div style={{ padding: '16px' }}>
                 <Grid container spacing={2}>
                     {loading ? (
