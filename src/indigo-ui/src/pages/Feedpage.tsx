@@ -3,6 +3,7 @@ import Grid from '@mui/material/Grid2';
 import { Card, CardContent, Typography, Skeleton } from '@mui/material';
 import { Post } from '../models/Post';
 import { PostFactory } from '../factories/PostFactory';
+import MainLayout from '../components/layout/MainLayout';
 
 const Feedpage: React.FC = () => {
     const [take, setTake] = useState<number>(20);
@@ -52,12 +53,13 @@ const Feedpage: React.FC = () => {
 
     return (
         <div>
+            <MainLayout>
             <div style={{ padding: '16px' }}>
                 <Grid container spacing={2}>
                     {loading ? (
                         Array.from(new Array(20)).map((_, index) => (
-                            <Grid size={{ xs:12, sm:6, md:4, lg:3, xl:2 }} key={index}>
-                                <Card style={{ height: '250px' }}>
+                            <Grid size={{ xs:12, sm:6, md:4, lg:3, xl:2 }} key={`grid-skeleton-${index}`}>
+                                <Card id={`card-skeleton-${index}`} style={{ height: '250px' }}>
                                     <CardContent>
                                         <Skeleton variant="text" width="80%" />
                                         <Skeleton variant="text" width="60%" />
@@ -68,7 +70,7 @@ const Feedpage: React.FC = () => {
                         ))
                     ) : (
                         feed.map(post => (
-                            <Grid size={{ xs:12, sm:6, md:4, lg:3, xl:2 }} key={post.id}>
+                            <Grid size={{ xs:12, sm:6, md:4, lg:3, xl:2 }} key={`grid-${post.id}`}>
                                 <Card id={`card-${post.id}`} style={{ height: '250px' }}>
                                     <CardContent>
                                         <Typography variant="h5">{post.title}</Typography>
@@ -81,6 +83,7 @@ const Feedpage: React.FC = () => {
                 </Grid>
                 <div id='load-more' ref={elementRef} style={{ height: '20px' }} />
             </div>
+            </MainLayout>
         </div>
     );
 };

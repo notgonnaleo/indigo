@@ -7,6 +7,7 @@ import { Topbar } from './desktop/Topbar';
 import { MobileTopbar } from './mobile/Topbar';
 import Bottombar from './mobile/Bottombar';
 import useMediaQuery from '@mui/material/useMediaQuery';
+import { useState } from 'react';
 
 const MainContent = styled('main', {
   shouldForwardProp: (prop) => prop !== 'open',
@@ -24,9 +25,12 @@ interface MainLayoutProps {
 }
 
 const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
+  
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+  const isTablet = useMediaQuery(theme.breakpoints.between('sm', 'md'));
+  const isDesktop = useMediaQuery(theme.breakpoints.up('md'));
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -36,8 +40,6 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
     setOpen(false);
   };
 
-  const isTablet = useMediaQuery(theme.breakpoints.between('sm', 'md'));
-  const isDesktop = useMediaQuery(theme.breakpoints.up('md'));
 
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>

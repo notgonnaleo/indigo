@@ -45,7 +45,11 @@ export const MobileTopbar: React.FC = () => {
     setAnchorEl(null);
   };
   return (
-    <AppBar variant="outlined" position="fixed">
+    <AppBar 
+      variant="outlined" 
+      position="fixed"
+      elevation={0}
+    >
       <Toolbar>         
         <Typography variant="h6" noWrap component="div">
           Indigo

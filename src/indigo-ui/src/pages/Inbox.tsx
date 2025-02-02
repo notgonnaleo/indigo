@@ -64,6 +64,7 @@ const Inbox: React.FC = () => {
                 <Box sx={{ display: 'flex', justifyContent: 'space-between', marginBottom: '16px' }}>
                     {Object.keys(InvoiceStatus).filter(key => isNaN(Number(key))).map((status, index) => (
                         <Card
+                            id={`status-name-${status}`}
                             variant='outlined'
                             key={index}
                             sx={{
@@ -113,8 +114,9 @@ const Inbox: React.FC = () => {
                 <Grid container spacing={2} sx={{ margin: '16px' }}>
                     {loading ? (
                         Array.from(new Array(20)).map((_, index) => (
-                            <Grid size={{ xs:12, sm:6, md:4, lg:3, xl:2 }} key={index}>
+                            <Grid size={{ xs:12, sm:6, md:4, lg:3, xl:2 }} key={`grid-skeleton-${index}`}>
                                 <Card 
+                                    id={`card-skeleton-${index}`}
                                     variant='outlined'
                                     sx={{ height: '200px' }}>
                                     <CardContent>
@@ -126,8 +128,8 @@ const Inbox: React.FC = () => {
                             </Grid>
                         ))
                     ) : (
-                        feed.map(invoice => (
-                            <Grid size={{ xs:12, sm:6, md:4, lg:3, xl:2 }} key={invoice.InvoiceId}>
+                        feed.map((invoice, index) => (
+                            <Grid size={{ xs:12, sm:6, md:4, lg:3, xl:2 }} key={`grid-${invoice.InvoiceId}-${index}`}>
                                 <Card 
                                     variant='outlined'
                                     id={`card-${invoice.InvoiceId}`} 

@@ -1,9 +1,15 @@
-import * as React from 'react';
+import React, { useState, useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import BottomNavigation from '@mui/material/BottomNavigation';
 import BottomNavigationAction from '@mui/material/BottomNavigationAction';
 
 export default function LabelBottomNavigation() {
-  const [value, setValue] = React.useState('recents');
+  const location = useLocation();
+  const [value, setValue] = useState(location.pathname);
+
+  useEffect(() => {
+    setValue(location.pathname);
+  }, [location.pathname]);
 
   const handleChange = (event: React.SyntheticEvent, newValue: string) => {
     setValue(newValue);
@@ -15,25 +21,33 @@ export default function LabelBottomNavigation() {
       value={value}
       onChange={handleChange}
     >
-    <BottomNavigationAction
-        label="Sidebar"
-        value="Sidebar"
-        icon={"Sidebar"}
+      <BottomNavigationAction
+        label="Menu"
+        value="/menu"
+        icon={"Menu"}
+        component={Link}
+        to="/menu"
       />
       <BottomNavigationAction
-        label="Recents"
-        value="recents"
-        icon={"Recents"}
+        label="Feedpage"
+        value="/feedpage"
+        icon={"Feedpage"}
+        component={Link}
+        to="/feedpage"
       />
       <BottomNavigationAction
-        label="Lol"
-        value="lol"
-        icon={"lol"}
+        label="Homepage"
+        value="/homepage"
+        icon={"Homepage"}
+        component={Link}
+        to="/homepage"
       />
       <BottomNavigationAction
-        label="Favorites"
-        value="favorites"
-        icon={"Favs"}
+        label="Inbox"
+        value="/inbox"
+        icon={"Inbox"}
+        component={Link}
+        to="/inbox"
       />
     </BottomNavigation>
   );

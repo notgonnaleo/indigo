@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { styled, useTheme, Theme, CSSObject } from '@mui/material/styles';
+import { styled, Theme, CSSObject } from '@mui/material/styles';
 import MuiDrawer from '@mui/material/Drawer';
 import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
@@ -64,7 +64,6 @@ interface SidebarProps {
 }
 
 const Sidebar: React.FC<SidebarProps> = ({ open, handleDrawerClose }) => {
-  const theme = useTheme();
   const navigate = useNavigate();
 
   return (
@@ -74,7 +73,7 @@ const Sidebar: React.FC<SidebarProps> = ({ open, handleDrawerClose }) => {
       open={open}
       onClose={handleDrawerClose}
       ModalProps={{
-        keepMounted: true, // Better open performance on mobile.
+        keepMounted: true,
       }}
     >
       <DrawerHeader>
