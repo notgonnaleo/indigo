@@ -9,7 +9,6 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import { useNavigate } from 'react-router-dom';
-import useMediaQuery from '@mui/material/useMediaQuery';
 
 const drawerWidth = 240;
 
@@ -67,12 +66,11 @@ interface SidebarProps {
 const Sidebar: React.FC<SidebarProps> = ({ open, handleDrawerClose }) => {
   const theme = useTheme();
   const navigate = useNavigate();
-  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
   return (
     <Drawer
-      variant={isMobile ? 'temporary' : 'permanent'}
-      anchor={isMobile ? 'bottom' : 'left'}
+      variant='permanent'
+      anchor='left'
       open={open}
       onClose={handleDrawerClose}
       ModalProps={{
@@ -81,7 +79,7 @@ const Sidebar: React.FC<SidebarProps> = ({ open, handleDrawerClose }) => {
     >
       <DrawerHeader>
         <IconButton onClick={handleDrawerClose}>
-          {theme.direction === 'rtl' ? "<ChevronRightIcon />" : "<ChevronLeftIcon />"}
+          {"Close"}
         </IconButton>
       </DrawerHeader>
       <Divider />
@@ -103,7 +101,7 @@ const Sidebar: React.FC<SidebarProps> = ({ open, handleDrawerClose }) => {
                   justifyContent: 'center',
                 }}
               >
-                {index % 2 === 0 ? "<InboxIcon />" : "<MailIcon />"}
+                {index % 2 === 0 ? "Hello" : "World"}
               </ListItemIcon>
               <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
             </ListItemButton>
