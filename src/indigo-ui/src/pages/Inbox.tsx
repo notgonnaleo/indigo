@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Grid from '@mui/material/Grid2';
-import { Card, CardContent, Typography, Skeleton, Button, Box, Breadcrumbs, Link, TextField } from '@mui/material';
+import { Card, CardContent, Typography, Skeleton, Button, Box, Breadcrumbs, Link, TextField, Accordion, AccordionDetails, AccordionSummary } from '@mui/material';
 import { InvoiceFactory } from '../factories/InvoiceFactory';
 import { Invoice, InvoiceStatus } from '../models/Invoice';
 import MainLayout from '../components/layout/MainLayout';
@@ -55,60 +55,149 @@ const Inbox: React.FC = () => {
         <MainLayout>
         <Box>
             <Box sx={{ padding: '16px' }}>
-
                 <Breadcrumbs aria-label="breadcrumb" sx={{ margin: '16px' }}>
                     <Link color="inherit" href="/">Home</Link>
                     <Typography color="textPrimary">Inbox</Typography>
                 </Breadcrumbs>
 
-                <Box sx={{ display: 'flex', justifyContent: 'space-between', marginBottom: '16px' }}>
-                    {Object.keys(InvoiceStatus).filter(key => isNaN(Number(key))).map((status, index) => (
-                        <Card
-                            id={`status-name-${status}`}
-                            variant='outlined'
-                            key={index}
-                            sx={{
-                                flex: 1,
-                                marginLeft: '16px',
-                                marginRight: '1px',
-                                padding: '16px',
-                                textAlign: 'center',
-                                cursor: 'pointer',
-                                backgroundColor: 'background.paper',
-                                color: 'text.primary'
-                            }}
-                            onClick={() => {console.log("Hello")}}
-                        >
-                            <Typography variant="h6">{status}</Typography>
-                        </Card>
-                    ))}
-                </Box>
-
-                <Box sx={{ display: 'flex', margin: '16px', alignItems: 'center' }}>
-                    <TextField
-                        label="Vendor Name"
-                        variant="outlined"
-                        sx={{ marginRight: '16px' }}
-                    />
-                    <TextField
-                        label="Bank Name"
-                        variant="outlined"
-                        sx={{ marginRight: '16px' }}
-                    />
-                    <TextField
-                        label="Bank Account Number"
-                        variant="outlined"
-                        sx={{ marginRight: '16px' }}
-                    />
-                    <TextField
-                        label="Amount"
-                        variant="outlined"
-                        sx={{ marginRight: '16px' }}
-                    />
-                    <Box sx={{ flexGrow: 1 }} />
-                    <Button variant="contained" color="primary">
-                        Search
+                <Box sx={{ display: 'flex', flexDirection: { xs: 'column', sm: 'row' }, justifyContent: 'space-between', marginBottom: '16px', marginRight: '16px' }}>
+                    <Button
+                        id={`card-status-all`}
+                        variant='outlined'
+                        className='Mui-selected'
+                        sx={{
+                            flex: 1,
+                            marginLeft: { sm: '16px' },
+                            marginRight: { sm: '1px' },
+                            marginBottom: { xs: '8px', sm: '0' },
+                            padding: '16px',
+                            textAlign: 'center',
+                            cursor: 'pointer',
+                            '&.Mui-selected': {
+                                backgroundColor: 'primary.main',
+                                color: 'background.paper',
+                            }
+                        }}
+                        onClick={(e) => {
+                            const buttons = document.querySelectorAll('button[id^="card-status-"]');
+                            buttons.forEach(button => button.classList.remove('Mui-selected'));
+                            e.currentTarget.classList.add('Mui-selected');
+                        }}
+                    >
+                        <Typography variant="h6">{"All"}</Typography>
                     </Button>
+                    <Button
+                        id={`card-status-pending`}
+                        variant='outlined'
+                        sx={{
+                            flex: 1,
+                            marginLeft: { sm: '16px' },
+                            marginRight: { sm: '1px' },
+                            marginBottom: { xs: '8px', sm: '0' },
+                            padding: '16px',
+                            textAlign: 'center',
+                            cursor: 'pointer',
+                            '&.Mui-selected': {
+                                backgroundColor: 'primary.main',
+                                color: 'background.paper',
+                            }
+                        }}
+                        onClick={(e) => {
+                            const buttons = document.querySelectorAll('button[id^="card-status-"]');
+                            buttons.forEach(button => button.classList.remove('Mui-selected'));
+                            e.currentTarget.classList.add('Mui-selected');
+                        }}
+                    >
+                        <Typography variant="h6">{"Pending"}</Typography>
+                    </Button>
+                    <Button
+                        id={`card-status-paid`}
+                        variant='outlined'
+                        sx={{
+                            flex: 1,
+                            marginLeft: { sm: '16px' },
+                            marginRight: { sm: '1px' },
+                            marginBottom: { xs: '8px', sm: '0' },
+                            padding: '16px',
+                            textAlign: 'center',
+                            cursor: 'pointer',
+                            '&.Mui-selected': {
+                                backgroundColor: 'primary.main',
+                                color: 'background.paper',
+                            }
+                        }}
+                        onClick={(e) => {
+                            const buttons = document.querySelectorAll('button[id^="card-status-"]');
+                            buttons.forEach(button => button.classList.remove('Mui-selected'));
+                            e.currentTarget.classList.add('Mui-selected');
+                        }}
+                    >
+                        <Typography variant="h6">{"Paid"}</Typography>
+                    </Button>
+                    <Button
+                        id={`card-status-void`}
+                        variant='outlined'
+                        sx={{
+                            flex: 1,
+                            marginLeft: { sm: '16px' },
+                            marginRight: { sm: '1px' },
+                            marginBottom: { xs: '8px', sm: '0' },
+                            padding: '16px',
+                            textAlign: 'center',
+                            cursor: 'pointer',
+                            '&.Mui-selected': {
+                                backgroundColor: 'primary.main',
+                                color: 'background.paper',
+                            }
+                        }}
+                        onClick={(e) => {
+                            const buttons = document.querySelectorAll('button[id^="card-status-"]');
+                            buttons.forEach(button => button.classList.remove('Mui-selected'));
+                            e.currentTarget.classList.add('Mui-selected');
+                        }}
+                    >
+                        <Typography variant="h6">{"Void"}</Typography>
+                    </Button>
+                </Box>
+                
+                <Box sx={{ padding: '16px'}}>
+                    <Accordion variant='outlined' sx={{ width: '100%' }}>
+                        <AccordionSummary
+                            expandIcon={"Open"}
+                            aria-controls="search-filters-content"
+                            id="search-filters-header"
+                        >
+                            <Typography>Search Filters</Typography>
+                        </AccordionSummary>
+                        <AccordionDetails>
+                            <Box sx={{ display: 'flex', flexDirection: { xs: 'column', sm: 'row' }, margin: '16px', alignItems: 'center' }}>
+                                <TextField
+                                    label="Vendor Name"
+                                    variant="outlined"
+                                    sx={{ marginRight: { sm: '16px' }, marginBottom: { xs: '16px', sm: '0' } }}
+                                />
+                                <TextField
+                                    label="Bank Name"
+                                    variant="outlined"
+                                    sx={{ marginRight: { sm: '16px' }, marginBottom: { xs: '16px', sm: '0' } }}
+                                />
+                                <TextField
+                                    label="Bank Account Number"
+                                    variant="outlined"
+                                    sx={{ marginRight: { sm: '16px' }, marginBottom: { xs: '16px', sm: '0' } }}
+                                />
+                                <TextField
+                                    label="Amount"
+                                    variant="outlined"
+                                    sx={{ marginRight: { sm: '16px' }, marginBottom: { xs: '16px', sm: '0' } }}
+                                />
+                                <Box sx={{ flexGrow: 1 }} />
+                                <Button variant="contained" color="primary">
+                                    Search
+                                </Button>
+                            </Box>
+                        </AccordionDetails>
+                    </Accordion>
                 </Box>
 
                 <Grid container spacing={2} sx={{ margin: '16px' }}>
@@ -161,6 +250,7 @@ const Inbox: React.FC = () => {
                         ))
                     )}
                 </Grid>
+
                 <div id='load-more' ref={elementRef} style={{ height: '20px' }} />
             </Box>
         </Box>
