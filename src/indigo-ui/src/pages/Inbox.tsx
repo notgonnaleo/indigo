@@ -3,6 +3,7 @@ import Grid from '@mui/material/Grid2';
 import { Card, CardContent, Typography, Skeleton, Button, Box, Breadcrumbs, Link, TextField, Accordion, AccordionDetails, AccordionSummary } from '@mui/material';
 import { InvoiceFactory } from '../factories/InvoiceFactory';
 import { Invoice, InvoiceStatus } from '../models/Invoice';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import MainLayout from '../components/layout/MainLayout';
 
 const Inbox: React.FC = () => {
@@ -163,7 +164,7 @@ const Inbox: React.FC = () => {
                 <Box sx={{ padding: '16px'}}>
                     <Accordion variant='outlined' sx={{ width: '100%' }}>
                         <AccordionSummary
-                            expandIcon={"Open"}
+                            expandIcon={<ExpandMoreIcon></ExpandMoreIcon>}
                             aria-controls="search-filters-content"
                             id="search-filters-header"
                         >

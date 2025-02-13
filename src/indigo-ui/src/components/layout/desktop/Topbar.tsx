@@ -4,6 +4,7 @@ import MuiAppBar, { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
+import MenuIcon from '@mui/icons-material/Menu';
 import { Menu, MenuItem } from '@mui/material';
 import { ThemeMode, useColorMode } from '../../../theme/colorModeSelector';
 import { useState } from 'react';
@@ -59,7 +60,7 @@ export const Topbar: React.FC<TopbarProps> = ({ open, handleDrawerOpen }) => {
           sx={{ marginRight: 5, ...(open && { display: 'none' }) }}
         >
         <Typography variant="h6" noWrap component="div">
-          Icon
+          <MenuIcon></MenuIcon>
         </Typography>          
         </IconButton>
         <Typography variant="h6" noWrap component="div">

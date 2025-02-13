@@ -8,6 +8,11 @@ import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
+import MenuIcon from '@mui/icons-material/Menu';
+import HomeIcon from '@mui/icons-material/Home';
+import InboxIcon from '@mui/icons-material/Inbox';
+import FeedIcon from '@mui/icons-material/Feed';
+import MenuOpenIcon from '@mui/icons-material/MenuOpen';
 import { useNavigate } from 'react-router-dom';
 
 const drawerWidth = 240;
@@ -78,20 +83,19 @@ const Sidebar: React.FC<SidebarProps> = ({ open, handleDrawerClose }) => {
     >
       <DrawerHeader>
         <IconButton onClick={handleDrawerClose}>
-          {"Close"}
+          <MenuOpenIcon></MenuOpenIcon>
         </IconButton>
       </DrawerHeader>
       <Divider />
       <List>
-        {['Inbox', 'Feedpage', 'Homepage'].map((text, index) => (
-          <ListItem key={text} disablePadding sx={{ display: 'block' }}>
-            <ListItemButton
+        <ListItem key={"Homepage"} disablePadding sx={{ display: 'block' }}>
+        <ListItemButton
               sx={{
                 minHeight: 48,
                 justifyContent: open ? 'initial' : 'center',
                 px: 2.5,
               }}
-              onClick={() => navigate(`/${text}`)}
+              onClick={() => navigate("/Homepage")}
             >
               <ListItemIcon
                 sx={{
@@ -100,12 +104,53 @@ const Sidebar: React.FC<SidebarProps> = ({ open, handleDrawerClose }) => {
                   justifyContent: 'center',
                 }}
               >
-                {index % 2 === 0 ? "Hello" : "World"}
+                <HomeIcon></HomeIcon>
               </ListItemIcon>
-              <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
+              <ListItemText primary={"Homepage"} sx={{ opacity: open ? 1 : 0 }} />
             </ListItemButton>
-          </ListItem>
-        ))}
+        </ListItem>
+        <ListItem key={"Inbox"} disablePadding sx={{ display: 'block' }}>
+          <ListItemButton
+              sx={{
+                minHeight: 48,
+                justifyContent: open ? 'initial' : 'center',
+                px: 2.5,
+              }}
+              onClick={() => navigate("/Inbox")}
+            >
+              <ListItemIcon
+                sx={{
+                  minWidth: 0,
+                  mr: open ? 3 : 'auto',
+                  justifyContent: 'center',
+                }}
+              >
+                <InboxIcon></InboxIcon>
+              </ListItemIcon>
+              <ListItemText primary={"Inbox"} sx={{ opacity: open ? 1 : 0 }} />
+            </ListItemButton>
+        </ListItem>
+        <ListItem key={"Feedpage"} disablePadding sx={{ display: 'block' }}>
+          <ListItemButton
+              sx={{
+                minHeight: 48,
+                justifyContent: open ? 'initial' : 'center',
+                px: 2.5,
+              }}
+              onClick={() => navigate("/Feedpage")}
+            >
+              <ListItemIcon
+                sx={{
+                  minWidth: 0,
+                  mr: open ? 3 : 'auto',
+                  justifyContent: 'center',
+                }}
+              >
+                <FeedIcon></FeedIcon>
+              </ListItemIcon>
+              <ListItemText primary={"Feedpage"} sx={{ opacity: open ? 1 : 0 }} />
+            </ListItemButton>
+        </ListItem>
       </List>
     </Drawer>
   );
