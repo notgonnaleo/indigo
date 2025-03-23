@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.13.35806.99
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Indigo.Invoicing.API", "Indigo.Invoicing.API.csproj", "{08B002EB-2A28-4E8C-9C2B-F6ACCF7456BB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Indigo.Invoicing.Domain", "..\Indigo.Invoicing.Domain\Indigo.Invoicing.Domain.csproj", "{0D510B6F-79E7-C32F-9B83-04E554D4D560}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Indigo.Invoicing.Infrastructure", "..\Indigo.Invoicing.Infrastructure\Indigo.Invoicing.Infrastructure.csproj", "{2FF16B7A-E5E4-BCF7-E599-A238988ABBAA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{08B002EB-2A28-4E8C-9C2B-F6ACCF7456BB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{08B002EB-2A28-4E8C-9C2B-F6ACCF7456BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{08B002EB-2A28-4E8C-9C2B-F6ACCF7456BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{08B002EB-2A28-4E8C-9C2B-F6ACCF7456BB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0D510B6F-79E7-C32F-9B83-04E554D4D560}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0D510B6F-79E7-C32F-9B83-04E554D4D560}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0D510B6F-79E7-C32F-9B83-04E554D4D560}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0D510B6F-79E7-C32F-9B83-04E554D4D560}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2FF16B7A-E5E4-BCF7-E599-A238988ABBAA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2FF16B7A-E5E4-BCF7-E599-A238988ABBAA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2FF16B7A-E5E4-BCF7-E599-A238988ABBAA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2FF16B7A-E5E4-BCF7-E599-A238988ABBAA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {0D7D0DF3-C242-445A-BC18-28B392D3533F}
+	EndGlobalSection
+EndGlobal
